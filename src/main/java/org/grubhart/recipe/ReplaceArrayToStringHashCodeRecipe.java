@@ -70,21 +70,25 @@ public class ReplaceArrayToStringHashCodeRecipe extends Recipe {
 
             J.MethodInvocation m = super.visitMethodInvocation(method,executionContext);
 
-            if(m.getSelect().getType().toString().endsWith("[]") && ARRAY_TO_STRING.matches(m)){
-                JavaType.Method methodType = m.getMethodType();
-                J.Identifier select = (J.Identifier) m.getSelect();
-                m = m.withTemplate(toStringTemplate,m.getCoordinates().replace(),select);
-                m = m.withMethodType(methodType);
-                maybeAddImport("java.util.Arrays");
+            JavaType.Method methodType = m.getMethodType();
+
+            if(m.getSelect().getType() instanceof JavaType.Array) {
+
+                if (ARRAY_TO_STRING.matches(m)){
+                    J.Identifier select = (J.Identifier) m.getSelect();
+                    m = m.withTemplate(toStringTemplate, m.getCoordinates().replace(), select);
+                }
+
+                if (ARRAY_HASHCODE.matches(m)) {
+                    J.Identifier select = (J.Identifier) m.getSelect();
+                    m = m.withTemplate(hashcodeTemplate, m.getCoordinates().replace(), select);
+                }
             }
 
-            if(m.getSelect().getType().toString().endsWith("[]") && ARRAY_HASHCODE.matches(m)){
-                JavaType.Method methodType = m.getMethodType();
-                J.Identifier select = (J.Identifier) m.getSelect();
-                m = m.withTemplate(hashcodeTemplate,m.getCoordinates().replace(),select);
-                m = m.withMethodType(methodType);
-                maybeAddImport("java.util.Arrays");
-            }
-            return m;      }
+            m = m.withMethodType(methodType);
+            maybeAddImport("java.util.Arrays");
+
+            return m;
+        }
     }
 }
