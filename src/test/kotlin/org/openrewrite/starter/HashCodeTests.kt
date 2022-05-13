@@ -31,16 +31,16 @@ class HashCodeTests: JavaRecipeTest {
             package org.grubhart.recipe;
             public class Program {
                 public static void main(String[] args) {
-                    String argStr = args.hashCode();
+                    int argHash = args.hashCode();
                     
                     int arrayInt[] = {2,3,4,5};
-                    String arrayIntStr = arrayInt.hashCode();
+                    int arrayIntHash = arrayInt.hashCode();
                     
                     int[] arrayInt2 = {1,6,7,0};
-                    String arrayIntStr2 = arrayInt2.hashCode();
+                    int arrayIntHash2 = arrayInt2.hashCode();
                     
                     String cadena = "hello world!";
-                    String copyStr = cadena.hashCode();
+                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
                     System.out.println(s.hashCode());
@@ -54,16 +54,16 @@ class HashCodeTests: JavaRecipeTest {
             
             public class Program {
                 public static void main(String[] args) {
-                    String argStr = Arrays.hashCode(args);
+                    int argHash = Arrays.hashCode(args);
                     
                     int arrayInt[] = {2,3,4,5};
-                    String arrayIntStr = Arrays.hashCode(arrayInt);
+                    int arrayIntHash = Arrays.hashCode(arrayInt);
                     
                     int[] arrayInt2 = {1,6,7,0};
-                    String arrayIntStr2 = Arrays.hashCode(arrayInt2);
+                    int arrayIntHash2 = Arrays.hashCode(arrayInt2);
                     
                     String cadena = "hello world!";
-                    String copyStr = cadena.hashCode();
+                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
                     System.out.println(Arrays.hashCode(s));
