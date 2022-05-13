@@ -61,9 +61,9 @@ public class ReplaceArrayToStringHashCodeRecipe extends Recipe {
                 .build();
 
         /*
-        With 'm.getSelect().getType().toString().endsWith("[]")' we catch every array possible: int[] , Object[], etc.
+        With 'm.getSelect().getType() instanceof JavaType.Array' we catch every array possible: int[] , Object[], etc.
         <MATCHER>.matches(m) allow identify if the method is toString or hashCode
-        I call first the array validation because this is a && operator if the first validation fail, we don't evaluate the second one
+        I call first the array validation because if the first validation fail, we don't evaluate the second one
          */
         @Override
         public J.MethodInvocation visitMethodInvocation(J.MethodInvocation method,ExecutionContext executionContext){
