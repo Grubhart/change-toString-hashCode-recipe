@@ -13,66 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openrewrite.starter
+package org.grubhart.recipe
 
-import org.grubhart.recipe.ReplaceArrayToStringHashCodeRecipe
 import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
 import org.openrewrite.java.JavaRecipeTest
 
-class ToStringTests: JavaRecipeTest {
+class HashCodeTests: JavaRecipeTest {
 
     override val recipe: Recipe
         get() = ReplaceArrayToStringHashCodeRecipe()
 
     @Test
-    fun testReplaceToString() = assertChanged(
+    fun testReplaceHashCode() = assertChanged(
         before = """
             package org.grubhart.recipe;
-
             public class Program {
-
                 public static void main(String[] args) {
-                    String argStr = args.toString();
+                    int argHash = args.hashCode();
                     
                     int arrayInt[] = {2,3,4,5};
-                    String arrayIntStr = arrayInt.toString();
+                    int arrayIntHash = arrayInt.hashCode();
                     
                     int[] arrayInt2 = {1,6,7,0};
-                    String arrayIntStr2 = arrayInt2.toString();
+                    int arrayIntHash2 = arrayInt2.hashCode();
                     
                     String cadena = "hello world!";
-                    String copyStr = cadena.toString();
+                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
-                    System.out.println(s.toString());
+                    System.out.println(s.hashCode());
                 }
-            }
-        """,
+            }""",
+
         after = """
             package org.grubhart.recipe;
             
             import java.util.Arrays;
-
+            
             public class Program {
-
                 public static void main(String[] args) {
-                    String argStr = Arrays.toString(args);
+                    int argHash = Arrays.hashCode(args);
                     
                     int arrayInt[] = {2,3,4,5};
-                    String arrayIntStr = Arrays.toString(arrayInt);
+                    int arrayIntHash = Arrays.hashCode(arrayInt);
                     
                     int[] arrayInt2 = {1,6,7,0};
-                    String arrayIntStr2 = Arrays.toString(arrayInt2);
+                    int arrayIntHash2 = Arrays.hashCode(arrayInt2);
                     
                     String cadena = "hello world!";
-                    String copyStr = cadena.toString();
+                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
-                    System.out.println(Arrays.toString(s));
+                    System.out.println(Arrays.hashCode(s));
                 }
-            }
-        """
+            }"""
     )
-
 }

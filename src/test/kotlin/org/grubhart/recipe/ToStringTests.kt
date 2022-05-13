@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openrewrite.starter
-
+package org.grubhart.recipe
 
 import org.grubhart.recipe.ReplaceArrayToStringHashCodeRecipe
+import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
 import org.openrewrite.java.JavaRecipeTest
 
-class FailedTests: JavaRecipeTest {
+class ToStringTests: JavaRecipeTest {
 
     override val recipe: Recipe
         get() = ReplaceArrayToStringHashCodeRecipe()
 
-
-    //@Test
+    @Test
     fun testReplaceToString() = assertChanged(
         before = """
             package org.grubhart.recipe;
@@ -34,10 +33,19 @@ class FailedTests: JavaRecipeTest {
             public class Program {
 
                 public static void main(String[] args) {
+                    String argStr = args.toString();
+                    
+                    int arrayInt[] = {2,3,4,5};
+                    String arrayIntStr = arrayInt.toString();
+                    
+                    int[] arrayInt2 = {1,6,7,0};
+                    String arrayIntStr2 = arrayInt2.toString();
+                    
+                    String cadena = "hello world!";
+                    String copyStr = cadena.toString();
                     
                     int[] s = new int[]{1,2,3};
-                    System.out.println(s);
-                    Sytem.out.println(String.format("s=%s",s));
+                    System.out.println(s.toString());
                 }
             }
         """,
@@ -49,10 +57,19 @@ class FailedTests: JavaRecipeTest {
             public class Program {
 
                 public static void main(String[] args) {
+                    String argStr = Arrays.toString(args);
+                    
+                    int arrayInt[] = {2,3,4,5};
+                    String arrayIntStr = Arrays.toString(arrayInt);
+                    
+                    int[] arrayInt2 = {1,6,7,0};
+                    String arrayIntStr2 = Arrays.toString(arrayInt2);
+                    
+                    String cadena = "hello world!";
+                    String copyStr = cadena.toString();
                     
                     int[] s = new int[]{1,2,3};
                     System.out.println(Arrays.toString(s));
-                    Sytem.out.println(String.format("s=%s",Arrays.toString(s)));
                 }
             }
         """

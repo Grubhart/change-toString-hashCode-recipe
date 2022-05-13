@@ -20,3 +20,5 @@ change to:
 > String arrayIntStr = Arrays.toString(arrayInt);
 
 The code is in org.grubhart.recipe package
+
+and you can found the tests on org.grubhart.recipe package

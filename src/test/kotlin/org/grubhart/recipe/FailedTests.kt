@@ -13,61 +13,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openrewrite.starter
+package org.grubhart.recipe
+
 
 import org.grubhart.recipe.ReplaceArrayToStringHashCodeRecipe
-import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
 import org.openrewrite.java.JavaRecipeTest
 
-class HashCodeTests: JavaRecipeTest {
+class FailedTests: JavaRecipeTest {
 
     override val recipe: Recipe
         get() = ReplaceArrayToStringHashCodeRecipe()
 
-    @Test
+
+    //@Test
     fun testReplaceToString() = assertChanged(
         before = """
             package org.grubhart.recipe;
+
             public class Program {
+
                 public static void main(String[] args) {
-                    int argHash = args.hashCode();
-                    
-                    int arrayInt[] = {2,3,4,5};
-                    int arrayIntHash = arrayInt.hashCode();
-                    
-                    int[] arrayInt2 = {1,6,7,0};
-                    int arrayIntHash2 = arrayInt2.hashCode();
-                    
-                    String cadena = "hello world!";
-                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
-                    System.out.println(s.hashCode());
+                    System.out.println(s);
+                    Sytem.out.println(String.format("s=%s",s));
                 }
-            }""",
-
+            }
+        """,
         after = """
             package org.grubhart.recipe;
             
             import java.util.Arrays;
-            
+
             public class Program {
+
                 public static void main(String[] args) {
-                    int argHash = Arrays.hashCode(args);
-                    
-                    int arrayInt[] = {2,3,4,5};
-                    int arrayIntHash = Arrays.hashCode(arrayInt);
-                    
-                    int[] arrayInt2 = {1,6,7,0};
-                    int arrayIntHash2 = Arrays.hashCode(arrayInt2);
-                    
-                    String cadena = "hello world!";
-                    int copyHash = cadena.hashCode();
                     
                     int[] s = new int[]{1,2,3};
-                    System.out.println(Arrays.hashCode(s));
+                    System.out.println(Arrays.toString(s));
+                    Sytem.out.println(String.format("s=%s",Arrays.toString(s)));
                 }
-            }"""
+            }
+        """
     )
+
 }
