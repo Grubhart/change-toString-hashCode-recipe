@@ -49,8 +49,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:latest.release")
 
     implementation("org.openrewrite:rewrite-java:${rewriteVersion}")
-    runtimeOnly("org.openrewrite:rewrite-java-8:${rewriteVersion}")
-    runtimeOnly("org.openrewrite:rewrite-java-11:${rewriteVersion}")
+    testRuntimeOnly("org.openrewrite:rewrite-java-8:${rewriteVersion}")
+    testRuntimeOnly("org.openrewrite:rewrite-java-11:${rewriteVersion}")
 
     testImplementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
